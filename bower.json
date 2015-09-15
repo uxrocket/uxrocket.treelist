@@ -1,0 +1,25 @@
+{
+  "name": "uxrocket.treelist",
+  "version": "0.1.0",
+  "homepage": "https://github.com/uxrocket/uxrocket.treelist",
+  "authors": [
+    "Bilal Çınarlı <bcinarli@gmail.com>"
+  ],
+  "description": "Tree view in tables",
+  "main": "lib/uxrocket.treelist.js",
+  "keywords": [
+    "uxrocket",
+    "jQuery",
+    "treelist",
+    "treeview",
+    "table"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

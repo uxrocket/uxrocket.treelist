@@ -1,0 +1,42 @@
+{
+  "name": "uxrocket.treelist",
+  "version": "0.1.0",
+  "description": "Tree view in tables",
+  "main": "lib/uxrocket.treelist.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uxrocket/uxrocket.treelist.git"
+  },
+  "keywords": [
+    "uxrocket",
+    "jQuery",
+    "tree",
+    "list",
+    "table",
+    "treeview"
+  ],
+  "author": "Bilal Cinarli <bcinarli@gmail.com> (https://github.com/bcinarli)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uxrocket/uxrocket.treelist/issues"
+  },
+  "homepage": "https://github.com/uxrocket/uxrocket.treelist#readme",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.0.1",
+    "gulp-csslint": "^0.2.0",
+    "gulp-header": "^1.7.1",
+    "gulp-jshint": "^1.11.2",
+    "gulp-mocha-phantomjs": "^0.10.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.4.1",
+    "mocha": "^2.3.2"
+  }
+}
