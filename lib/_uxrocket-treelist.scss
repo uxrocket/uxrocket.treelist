@@ -3,3 +3,34 @@
 /** -------------------------------------------
     Treelist
     ------------------------------------------- **/
+.uxr-treelist {
+    &-current {
+
+    }
+
+    &-content {
+        td,
+        th {
+            &:first-child {
+                padding-left: 1em;
+            }
+        }
+
+        &.uxr-treelist-header ~ .uxr-treelist-content {
+            td,
+            th {
+                &:first-child {
+                    padding-left: 2em;
+                }
+            }
+        }
+    }
+
+    &-collapsed {
+        display: none;
+    }
+
+    &-toggle {
+        cursor: pointer;
+    }
+}
