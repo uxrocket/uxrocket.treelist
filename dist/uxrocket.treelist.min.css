@@ -2,6 +2,6 @@
  *  Tree view in tables 
  *  @author Bilal Cinarli <bcinarli@gmail.com> (https://github.com/bcinarli) 
  *  @version 0.1.0 
- *  @build Thu Sep 17 2015 21:54:03 GMT+0300 (EEST) 
+ *  @build Thu Sep 17 2015 22:31:46 GMT+0300 (EEST) 
  */
-.uxr-treelist-content td:first-child,.uxr-treelist-content th:first-child{padding-left:1em}.uxr-treelist-content.uxr-treelist-header ~ .uxr-treelist-content td:first-child,.uxr-treelist-content.uxr-treelist-header ~ .uxr-treelist-content th:first-child{padding-left:2em}.uxr-treelist-collapsed{display:none}.uxr-treelist-toggle{cursor:pointer}
+.uxr-treelist-content td:first-child,.uxr-treelist-content th:first-child{padding-left:1em}.uxr-treelist-collapsed{display:none}.uxr-treelist-toggle{cursor:pointer}

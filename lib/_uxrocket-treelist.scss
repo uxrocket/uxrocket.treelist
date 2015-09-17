@@ -8,20 +8,15 @@
 
     }
 
+    &-treelist-header {
+
+    }
+
     &-content {
         td,
         th {
             &:first-child {
                 padding-left: 1em;
-            }
-        }
-
-        &.uxr-treelist-header ~ .uxr-treelist-content {
-            td,
-            th {
-                &:first-child {
-                    padding-left: 2em;
-                }
             }
         }
     }

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>UX Rocket Treelist</title>
+
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../lib/uxrocket.treelist.js"></script>
+    <script>
+        $(function(){
+           $('.treelist').treelist();
+        });
+    </script>
+
+    <style>
+        *, *:before, *:after { box-sizing: border-box }
+        html { width: 100%; height: 100%; }
+        body { width: 100%; height: 100%; margin: 0; padding: 0; font: 16px/1.4 "Gill Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+        .content { width: 48em; margin: 0 auto; padding: 5em; }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 5px;
+        }
+
+        th {
+            text-align: left;
+            border: 1px solid #f0f0f0;
+            background-color: #f0f0f0;
+        }
+
+        td {
+            border: 1px solid #f0f0f0;
+        }
+
+        td:nth-child(2){
+            width: 75px;
+        }
+
+        td:last-child {
+            width: 100px;
+        }
+
+        .multi tr[data-uxrtl-parent="2"] td:first-child,
+        .multi tr[data-uxrtl-parent="6"] td:first-child {
+            padding-left: 2em;
+        }
+    </style>
+
+    <link rel="stylesheet" href="../dist/uxrocket.treelist.css" />
+</head>
+<body>
+    <div class="content">
+        <h2>Single Tree</h2>
+        <table class="treelist">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Version</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-uxrtl-id="1">
+                    <td class="uxr-treelist-toggle">UX Rocket Treelist</td>
+                    <td>0.1.0</td>
+                    <td>Plugin</td>
+                </tr>
+                <tr data-uxrtl-id="2" data-uxrtl-parent="1">
+                    <td>jQuery</td>
+                    <td>Latest</td>
+                    <td>Dependency</td>
+                </tr>
+                <tr data-uxrtl-id="3">
+                    <td>UX Rocket Autocomplete</td>
+                    <td>2.0.2</td>
+                    <td>Plugin</td>
+                </tr>
+                <tr data-uxrtl-id="4" data-uxrtl-parent="3">
+                    <td>jQuery</td>
+                    <td>Latest</td>
+                    <td>Dependency</td>
+                </tr>
+                <tr data-uxrtl-id="5" data-uxrtl-parent="3">
+                    <td>Handlebars</td>
+                    <td>Latest</td>
+                    <td>Dependency</td>
+                </tr>
+                <tr data-uxrtl-id="6">
+                    <td>UX Rocket Modal</td>
+                    <td>0.8.0</td>
+                    <td>Plugin</td>
+                </tr>
+                <tr data-uxrtl-id="7" data-uxrtl-parent="6">
+                    <td>jQuery</td>
+                    <td>Latest</td>
+                    <td>Dependency</td>
+                </tr>
+                <tr data-uxrtl-id="8" data-uxrtl-parent="6">
+                    <td>Colorbox</td>
+                    <td>Latest</td>
+                    <td>Dependency</td>
+                </tr>
+                <tr data-uxrtl-id="9">
+                    <td>UX Rocket Shortcodes</td>
+                    <td>0.2.0</td>
+                    <td>Plugin</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Multi Level Tree</h2>
+        <table class="treelist multi">
+            <tr data-uxrtl-id="0">
+                <td>Parent Node 1</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="1" data-uxrtl-parent="0">
+                <td>Sub Node 1.1</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="2" data-uxrtl-parent="0">
+                <td>Sub Parent Node 1.2</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="3" data-uxrtl-parent="2">
+                <td>Sub Node 1.2.1</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="4" data-uxrtl-parent="2">
+                <td>Sub Node 1.2.2</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="5" data-uxrtl-parent="2">
+                <td>Sub Node 1.2.3</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="6" data-uxrtl-parent="0">
+                <td>Sub Parent Node 1.3</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="7" data-uxrtl-parent="6">
+                <td>Sub Node 1.3.1</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="8" data-uxrtl-parent="6">
+                <td>Sub Node 1.3.2</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="9" data-uxrtl-parent="6">
+                <td>Sub Node 1.3.3</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="10">
+                <td>Parent Node 2</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="11" data-uxrtl-parent="10">
+                <td>Sub Node 2.1</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="12" data-uxrtl-parent="10">
+                <td>Sub Node 2.2</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr data-uxrtl-id="13">
+                <td>Node 3</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

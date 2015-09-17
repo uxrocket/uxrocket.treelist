@@ -7,11 +7,6 @@
   padding-left: 1em;
 }
 
-.uxr-treelist-content.uxr-treelist-header ~ .uxr-treelist-content td:first-child,
-.uxr-treelist-content.uxr-treelist-header ~ .uxr-treelist-content th:first-child {
-  padding-left: 2em;
-}
-
 .uxr-treelist-collapsed {
   display: none;
 }
