@@ -1,7 +1,7 @@
 /*! UX Rocket Treelist 
  *  Tree view in tables 
  *  @author Bilal Cinarli <bcinarli@gmail.com> (https://github.com/bcinarli) 
- *  @version 0.1.0 
- *  @build Thu Sep 17 2015 22:31:46 GMT+0300 (EEST) 
+ *  @version 0.2.0 
+ *  @build Thu Oct 01 2015 14:21:53 GMT+0300 (EEST) 
  */
 .uxr-treelist-content td:first-child,.uxr-treelist-content th:first-child{padding-left:1em}.uxr-treelist-collapsed{display:none}.uxr-treelist-toggle{cursor:pointer}
