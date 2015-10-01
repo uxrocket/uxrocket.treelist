@@ -28,11 +28,12 @@
         },
 
         events = {
-            click    : 'click.uxrTreelist',
-            ready    : 'uxrready.uxTreelist',
-            collapsed: 'uxrcollapsed.uxTreelist',
-            expanded : 'uxrexpanded.uxTreelist',
-            remove   : 'uxrremove.uxTreelist'
+            click        : 'click.uxrTreelist',
+            ready        : 'uxrready.uxTreelist',
+            collapsed    : 'uxrcollapsed.uxTreelist',
+            expanded     : 'uxrexpanded.uxTreelist',
+            leafcollapsed: 'uxrleafcollapsed.uxrTreelist',
+            remove       : 'uxrremove.uxTreelist'
         },
 
         ns = {
@@ -134,11 +135,15 @@
                 .on(events.remove, function() {
                     _this.onDestroy();
                 })
-                .on(events.expanded, '.uxr-treelist-content', function() {
-                    _this.onExpanded(this);
+                .on(events.expanded, '.uxr-treelist-header', function() {
+                    console.log(this);
+                    _this.onBranchExpanded(this);
                 })
-                .on(events.collapsed, '.uxr-treelist-content', function() {
-                    _this.onCollapsed(this);
+                .on(events.collapsed, '.uxr-treelist-header', function() {
+                    _this.onBranchCollapsed(this);
+                })
+                .on(events.leafcollapsed, '.uxr-treelist-content', function() {
+                    _this.onLeafCollapsed(this);
                 });
         },
 
@@ -149,40 +154,39 @@
         expand: function($branch) {
             $branch
                 .addClass('uxr-treelist-expanded')
+                .trigger('uxrexpanded')
                 .data('uxrtl-leaves')
-                .removeClass('uxr-treelist-collapsed')
-                .trigger('uxrexpanded');
+                .removeClass('uxr-treelist-collapsed');
         },
 
         collapse: function($branch) {
             $branch
                 .removeClass('uxr-treelist-expanded')
+                .trigger('uxrcollapsed')
                 .data('uxrtl-leaves')
                 .addClass('uxr-treelist-collapsed')
                 .filter('.uxr-treelist-header')
-                .trigger('uxrcollapsed');
+                .trigger('uxrleafcollapsed');
         },
 
         onReady: function() {
             utils.callback(this.options.onReady);
         },
 
-        onExpanded: function(leaf) {
-            var $leaf = $(leaf),
-                onExpand = $leaf.data('on-expand') || false;
-
-            utils.callback(onExpand);
+        onBranchExpanded: function(branch) {
+            this.triggerCallback(branch, 'expand');
         },
 
-        onCollapsed: function(leaf) {
-            var $leaf = $(leaf),
-                onCollapse = $leaf.data('on-collapse') || false;
+        onBranchCollapsed: function(branch) {
+            this.triggerCallback(branch, 'collapse');
+        },
+
+        onLeafCollapsed: function(leaf) {
+            var $leaf = $(leaf);
 
             if($leaf.is('.uxr-treelist-header')) {
                 this.collapse($leaf);
             }
-
-            utils.callback(onCollapse);
         },
 
         onDestroy: function() {
@@ -199,6 +203,13 @@
 
         emitEvent: function(which) {
             this.$el.trigger('uxr' + which);
+        },
+
+        triggerCallback: function(el, event) {
+            var $el = $(el),
+                callback = $el.data('on-' + event) || false;
+
+            utils.callback(callback);
         }
     });
 
