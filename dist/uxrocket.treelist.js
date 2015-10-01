@@ -22,12 +22,17 @@
     var ux,
         rocketName = 'uxrTreelist',
 
-        defaults = {},
+        defaults = {
+            onReady : false,
+            onRemove: false
+        },
 
         events = {
             click    : 'click.uxrTreelist',
-            collapsed: 'collapsed.uxTreelist',
-            expanded : 'expanded.uxTreelist'
+            ready    : 'uxrready.uxTreelist',
+            collapsed: 'uxrcollapsed.uxTreelist',
+            expanded : 'uxrexpanded.uxTreelist',
+            remove   : 'uxrremove.uxTreelist'
         },
 
         ns = {
@@ -59,6 +64,8 @@
             this.prepare();
 
             this.bindUIActions();
+
+            this.emitEvent('ready');
         },
 
         prepare: function() {
@@ -121,27 +128,65 @@
                         _this.expand($branch);
                     }
                 })
+                .on(events.ready, function() {
+                    _this.onReady();
+                })
+                .on(events.remove, function() {
+                    _this.onDestroy();
+                })
+                .on(events.expanded, '.uxr-treelist-content', function() {
+                    _this.onExpanded(this);
+                })
                 .on(events.collapsed, '.uxr-treelist-content', function() {
                     _this.onCollapsed(this);
                 });
         },
 
+        unbindUIActions: function() {
+            this.$el.off('.' + rocketName);
+        },
+
         expand: function($branch) {
-            $branch.addClass('uxr-treelist-expanded');
-            $branch.data('uxrtl-leaves').removeClass('uxr-treelist-collapsed');
+            $branch
+                .addClass('uxr-treelist-expanded')
+                .data('uxrtl-leaves')
+                .removeClass('uxr-treelist-collapsed')
+                .trigger('uxrexpanded');
         },
 
         collapse: function($branch) {
-            $branch.removeClass('uxr-treelist-expanded');
-            $branch.data('uxrtl-leaves').addClass('uxr-treelist-collapsed').trigger('collapsed');
+            $branch
+                .removeClass('uxr-treelist-expanded')
+                .data('uxrtl-leaves')
+                .addClass('uxr-treelist-collapsed')
+                .filter('.uxr-treelist-header')
+                .trigger('uxrcollapsed');
+        },
+
+        onReady: function() {
+            utils.callback(this.options.onReady);
+        },
+
+        onExpanded: function(leaf) {
+            var $leaf = $(leaf),
+                onExpand = $leaf.data('on-expand') || false;
+
+            utils.callback(onExpand);
         },
 
         onCollapsed: function(leaf) {
-            var $leaf = $(leaf);
+            var $leaf = $(leaf),
+                onCollapse = $leaf.data('on-collapse') || false;
 
             if($leaf.is('.uxr-treelist-header')) {
                 this.collapse($leaf);
             }
+
+            utils.callback(onCollapse);
+        },
+
+        onDestroy: function() {
+            utils.callback(this.options.onRemove);
         },
 
         removeClasses: function() {
@@ -150,8 +195,63 @@
 
         destroy: function() {
             return ux.destroy(this.el);
+        },
+
+        emitEvent: function(which) {
+            this.$el.trigger('uxr' + which);
         }
     });
+
+    var utils = {
+        callback: function(fn) {
+            // if callback string is function call it directly
+            if(typeof fn === 'function') {
+                fn.apply(this);
+            }
+
+            // if callback defined via data-attribute, call it via new Function
+            else {
+                if(fn !== false) {
+                    var _fn = /([a-zA-Z._$0-9]+)(\(?(.*)?\))?/.exec(fn),
+                        _fn_ns = _fn[1].split('.'),
+                        _args = _fn[3] ? _fn[3] : '',
+                        func = _fn_ns.pop(),
+                        context = _fn_ns[0] ? window[_fn_ns[0]] : window;
+
+                    for(var i = 1; i < _fn_ns.length; i++) {
+                        context = context[_fn_ns[i]];
+                    }
+
+                    return context[func](_args);
+                }
+            }
+        },
+
+        getStringVariable: function(str) {
+            var val;
+            // check if it is chained
+            if(str.indexOf('.') > -1) {
+                var chain = str.split('.'),
+                    chainVal = window[chain[0]];
+
+                for(var i = 1; i < chain.length; i++) {
+                    chainVal = chainVal[chain[i]];
+                }
+
+                val = chainVal;
+            }
+
+            else {
+                val = window[str];
+            }
+
+            return val;
+        },
+
+        getClassname: function(which) {
+            return ns.prefix + ns.name + '-' + ns.classes[which];
+        }
+    };
 
     ux = $.fn.treelist = $.fn.uxrtreelist = $.uxrtreelist = function(options) {
         var selector = this.selector;
@@ -176,8 +276,7 @@
             // remove ready class
             _instance.removeClasses('uxr-treelist-ready');
 
-            // remove branch info
-            _this.headers.removeData('uxrtl-leaves');
+            _instance.unbindUIActions();
 
             // remove plugin data
             _this.removeData(ns.data);
@@ -185,8 +284,9 @@
     };
 
 // version
-    ux.version = '0.1.0';
+    ux.version = '0.2.0';
 
 // default settings
     ux.settings = defaults;
-}));
+}))
+;
