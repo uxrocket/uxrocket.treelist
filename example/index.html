@@ -56,7 +56,7 @@
 <body>
     <div class="content">
         <h2>Single Tree</h2>
-        <table class="treelist">
+        <table class="treelist" data-on-destroy="console.log('removed')">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -70,7 +70,7 @@
                     <td>0.1.0</td>
                     <td>Plugin</td>
                 </tr>
-                <tr data-uxrtl-id="2" data-uxrtl-parent="1">
+                <tr data-uxrtl-id="2" data-uxrtl-parent="1" data-on-expand="console.log('expanded')">
                     <td>jQuery</td>
                     <td>Latest</td>
                     <td>Dependency</td>
@@ -125,7 +125,7 @@
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
-            <tr data-uxrtl-id="2" data-uxrtl-parent="0">
+            <tr data-uxrtl-id="2" data-uxrtl-parent="0"  data-on-expand="console.log('expanded')" data-on-collapse="console.log('collapsed')">
                 <td>Sub Parent Node 1.2</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
