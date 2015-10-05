@@ -106,6 +106,7 @@ Data Attributes   | Description
 ----------------- | ------------------------------------------------------------------------
 data-on-expand    | Function/method called after parent row expaned. Applies to parent row
 data-on-collapse  | Function/method called after parent row collapsed. Applies to parent row
+data-active       | If set `true` parent row and its sub rows will be expanded on load.
 data-uxrtl-id     | Generic ID attribute for rows. Only required if row is a parent
 data-uxrtl-parent | Parent ID for the child rows. Required for obtaining parent/child relation
 data-on-ready     | Function called after plugin binded to table. Applies to table itself
