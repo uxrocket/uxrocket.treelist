@@ -250,17 +250,8 @@
             // if callback defined via data-attribute, call it via new Function
             else {
                 if(fn !== false) {
-                    var _fn = /([a-zA-Z._$0-9]+)(\(?(.*)?\))?/.exec(fn),
-                        _fn_ns = _fn[1].split('.'),
-                        _args = _fn[3] ? _fn[3] : '',
-                        func = _fn_ns.pop(),
-                        context = _fn_ns[0] ? window[_fn_ns[0]] : window;
-
-                    for(var i = 1; i < _fn_ns.length; i++) {
-                        context = context[_fn_ns[i]];
-                    }
-
-                    return context[func](_args);
+                    var func = new Function('return ' + fn);
+                    func();
                 }
             }
         },
@@ -322,7 +313,7 @@
     };
 
 // version
-    ux.version = '0.3.0';
+    ux.version = '0.4.0';
 
 // default settings
     ux.settings = defaults;
