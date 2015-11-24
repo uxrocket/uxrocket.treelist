@@ -22,51 +22,52 @@
     var ux,
         rocketName = 'uxrTreelist',
 
-        defaults = {
-            header : '',
+        defaults   = {
+            header:  '',
             content: '',
-            toggle : '',
+            toggle:  '',
 
-            onReady : false,
+            onReady:  false,
             onRemove: false
         },
 
-        events = {
-            click        : 'click.uxrTreelist',
-            ready        : 'uxrready.uxTreelist',
-            collapsed    : 'uxrcollapsed.uxTreelist',
-            expanded     : 'uxrexpanded.uxTreelist',
-            leafcollapsed: 'uxrleafcollapsed.uxrTreelist',
-            remove       : 'uxrremove.uxTreelist'
+        events     = {
+            click:         'click.' + rocketName,
+            ready:         'uxrready.uxTreelist',
+            collapsed:     'uxrcollapsed.uxTreelist',
+            expanded:      'uxrexpanded.uxTreelist',
+            leafcollapsed: 'uxrleafcollapsed.' + rocketName,
+            remove:        'uxrremove.uxTreelist'
         },
 
-        ns = {
-            prefix : 'uxr-',
-            rocket : 'uxRocket',
-            data   : rocketName,
-            name   : 'treelist',
-            id     : 'uxrtl-id',
-            parent : 'uxrtl-parent',
-            leaves : 'uxrtl-leaves',
+        ns         = {
+            prefix:  'uxr-',
+            rocket:  'uxRocket',
+            data:    rocketName,
+            name:    'treelist',
+            id:      'uxrtl-id',
+            parent:  'uxrtl-parent',
+            leaves:  'uxrtl-leaves',
             classes: {
-                ready    : 'ready',
-                header   : 'header',
-                toggle   : 'toggle',
-                expanded : 'expanded',
+                ready:     'ready',
+                header:    'header',
+                toggle:    'toggle',
+                expanded:  'expanded',
                 collapsed: 'collapsed',
-                content  : 'content'
+                content:   'content',
+                arrow:     'arrow'
             }
         };
 
     var Treelist = function(el, options, selector) {
-        this._name = rocketName;
+        this._name     = rocketName;
         this._defaults = defaults;
 
-        this.el = el;
-        this.$el = $(el);
-        this.options = $.extend(true, {}, defaults, options, this.$el.data());
+        this.el       = el;
+        this.$el      = $(el);
+        this.options  = $.extend(true, {}, defaults, options, this.$el.data());
         this.selector = selector;
-        this.headers = [];
+        this.headers  = [];
         this.contents = [];
 
         this.init();
@@ -92,7 +93,7 @@
         },
 
         getRows: function() {
-            var _this = this,
+            var _this   = this,
                 headers = [];
 
             this.$rows.filter('[data-' + ns.parent + ']').map(function(item) {
@@ -108,7 +109,7 @@
         },
 
         setHeaders: function() {
-            var _this = this,
+            var _this  = this,
                 toggle = _this.options.toggle || utils.getClassname('toggle');
 
             this.headers.map(function(item) {
@@ -116,7 +117,8 @@
 
                 item
                     .addClass(utils.getClassname('header') + ' ' + _this.options.header)
-                    .data(ns.leaves, $leaves);
+                    .data(ns.leaves, $leaves)
+                    .children(0).prepend('<span class="' + utils.getClassname('arrow') + '"></span>');
 
                 if(item.data('active') === true) {
                     item.addClass(utils.getClassname('expanded'));
@@ -233,7 +235,7 @@
         },
 
         triggerCallback: function(el, event) {
-            var $el = $(el),
+            var $el      = $(el),
                 callback = $el.data('on-' + event) || false;
 
             utils.callback(callback);
@@ -260,7 +262,7 @@
             var val;
             // check if it is chained
             if(str.indexOf('.') > -1) {
-                var chain = str.split('.'),
+                var chain    = str.split('.'),
                     chainVal = window[chain[0]];
 
                 for(var i = 1; i < chain.length; i++) {
@@ -299,7 +301,7 @@
         var $el = el !== undefined ? $(el) : $('.uxr-treelist-ready');
 
         $el.each(function() {
-            var _this = $(this),
+            var _this     = $(this),
                 _instance = _this.data(ns.data);
 
             // remove ready class
@@ -313,7 +315,7 @@
     };
 
 // version
-    ux.version = '0.4.0';
+    ux.version = '0.5.0';
 
 // default settings
     ux.settings = defaults;
